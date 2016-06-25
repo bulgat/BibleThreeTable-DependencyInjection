@@ -1,0 +1,37 @@
+﻿@model IEnumerable<ThreeBook.Models.Table>
+
+@{
+    ViewBag.Title = "Содержимое книг";
+}
+
+<h2>Содержимое книг</h2>
+
+<p>
+
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.uid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.title)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.uid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.title)
+        </td>
+        <td>
+
+        </td>
+    </tr>
+}
+
+</table>

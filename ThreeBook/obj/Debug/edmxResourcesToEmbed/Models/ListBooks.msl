@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище DataBooksModelContainer" CdmEntityContainer="DataBooksEntities1">
+    <EntitySetMapping Name="Table">
+      <EntityTypeMapping TypeName="DataBooksModel.ContentBook">
+        <MappingFragment StoreEntitySet="Table">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="uid" ColumnName="uid" />
+          <ScalarProperty Name="title" ColumnName="title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TitleBook">
+      <EntityTypeMapping TypeName="DataBooksModel.TitleBook">
+        <MappingFragment StoreEntitySet="TitleBook">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="uid" ColumnName="uid" />
+          <ScalarProperty Name="title" ColumnName="title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TypesBook">
+      <EntityTypeMapping TypeName="DataBooksModel.TypesBook">
+        <MappingFragment StoreEntitySet="TypesBook">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="title" ColumnName="title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

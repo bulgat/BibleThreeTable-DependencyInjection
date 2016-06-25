@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DataBooksModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Table">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="uid" Type="Int32" />
+    <Property Name="title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="TitleBook" Relationship="Self.FK_Table_TitleBook" FromRole="Table" ToRole="TitleBook" />
+  </EntityType>
+  <EntityType Name="TitleBook">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="uid" Type="Int32" Nullable="false" />
+    <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Table" Relationship="Self.FK_Table_TitleBook" FromRole="TitleBook" ToRole="Table" />
+    <NavigationProperty Name="TypesBook" Relationship="Self.FK_TitleBook_TypesBook" FromRole="TitleBook" ToRole="TypesBook" />
+  </EntityType>
+  <EntityType Name="TypesBook">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="TitleBook" Relationship="Self.FK_TitleBook_TypesBook" FromRole="TypesBook" ToRole="TitleBook" />
+  </EntityType>
+  <Association Name="FK_Table_TitleBook">
+    <End Role="TitleBook" Type="Self.TitleBook" Multiplicity="0..1" />
+    <End Role="Table" Type="Self.Table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TitleBook">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Table">
+        <PropertyRef Name="uid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TitleBook_TypesBook">
+    <End Role="TypesBook" Type="Self.TypesBook" Multiplicity="1" />
+    <End Role="TitleBook" Type="Self.TitleBook" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TypesBook">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TitleBook">
+        <PropertyRef Name="uid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DataBooksEntities2" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Table" EntityType="Self.Table" />
+    <EntitySet Name="TitleBook" EntityType="Self.TitleBook" />
+    <EntitySet Name="TypesBook" EntityType="Self.TypesBook" />
+    <AssociationSet Name="FK_Table_TitleBook" Association="Self.FK_Table_TitleBook">
+      <End Role="TitleBook" EntitySet="TitleBook" />
+      <End Role="Table" EntitySet="Table" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TitleBook_TypesBook" Association="Self.FK_TitleBook_TypesBook">
+      <End Role="TypesBook" EntitySet="TypesBook" />
+      <End Role="TitleBook" EntitySet="TitleBook" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

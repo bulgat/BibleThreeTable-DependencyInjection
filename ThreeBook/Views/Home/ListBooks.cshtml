@@ -1,0 +1,39 @@
+﻿@model IEnumerable<ThreeBook.Models.TitleBook>
+
+@{
+    ViewBag.Title = "Список книг по категориям";
+}
+
+<h2>Список книг по категориям</h2>
+
+<p>
+    
+    @Html.ActionLink("Создать книгу", "ListBooksCreate", new { id = ViewBag.uid })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.uid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.title)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.uid)
+        </td>
+        <td>
+            @Html.ActionLink(@Html.DisplayFor(modelItem => item.title).ToString(), "ContentBook", new { id = item.Id })
+            
+        </td>
+        <td>
+ 
+        </td>
+    </tr>
+}
+
+</table>
