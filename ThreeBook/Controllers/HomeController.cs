@@ -203,7 +203,12 @@ namespace ThreeBook.Controllers
             return View(ListReg);
         }
 
-       
-        
+        [HttpGet]
+        public JsonResult FirstBook()
+        {
+            string name = "FirstBookAuthor";
+            return Json(name, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }
