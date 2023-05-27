@@ -16,8 +16,16 @@ namespace ThreeBook.Models
             System.Diagnostics.Debug.WriteLine(" name ="+ book.Name);
             ChangeName(ref book);
             System.Diagnostics.Debug.WriteLine("REF name =" + book.Name);
-            int i = 5; object o = i; long j = (long)o;
-            System.Diagnostics.Debug.WriteLine("REF name j =" + j);
+            int i = 5;
+            System.Diagnostics.Debug.WriteLine("00 =" +i);
+            long kol = (long)i;
+            System.Diagnostics.Debug.WriteLine("000 =" + kol);
+            object o = i;
+            System.Diagnostics.Debug.WriteLine("01 ="+o);
+            long job = (int)o;
+            System.Diagnostics.Debug.WriteLine("001 =" + job);
+            //long j = (long)o;
+            //System.Diagnostics.Debug.WriteLine("REF name j =" + j);
         }
         private void ChangeName(Book book)
         {
