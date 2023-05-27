@@ -19,6 +19,7 @@ namespace ThreeBook.Controllers
         public ActionResult Index()
         {
             var ListReg = (from a in context.TypesBook select a).ToList();
+            ModelMain modelMain = new ModelMain();
 
             return View(ListReg);
         }
