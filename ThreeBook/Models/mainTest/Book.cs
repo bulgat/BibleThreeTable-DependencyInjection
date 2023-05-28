@@ -8,5 +8,6 @@ namespace ThreeBook.Models.mainTest
     public class Book
     {
         public string Name { get; set; }
+        public int Count { get; set; }
     }
 }

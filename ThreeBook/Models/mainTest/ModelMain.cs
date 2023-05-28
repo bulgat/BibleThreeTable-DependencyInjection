@@ -10,6 +10,9 @@ namespace ThreeBook.Models
     {
         public ModelMain()
         {
+            Dictionary<string, Book> dictionaryBook = new Dictionary<string, Book>() { ["kol"] = new Book { } };
+
+            System.Diagnostics.Debug.WriteLine(" name dict book = " + dictionaryBook["kol"]);
             Book book = new Book();
             book.Name = "kol";
             ChangeName(book);
@@ -26,6 +29,28 @@ namespace ThreeBook.Models
             System.Diagnostics.Debug.WriteLine("001 =" + job);
             //long j = (long)o;
             //System.Diagnostics.Debug.WriteLine("REF name j =" + j);
+
+            Book bookProd =  new Book();
+            bookProd.Name = "null=============";
+            bookProd.Count = 51;
+            var koll = bookProd?.Name ?? "Error";
+            System.Diagnostics.Debug.WriteLine("002 =" + koll);
+
+            switch (bookProd.Count)
+            {
+                case 12:
+                    System.Diagnostics.Debug.WriteLine("003 =  12" );
+                    break;
+                case 50:
+                    //System.Diagnostics.Debug.WriteLine("003 =" + intValue);
+                    break;
+                //case var intValue when intValue > 50:
+                   // break;
+                //case int intValue when intValue > 50:
+                default:
+                    break;
+            };
+
         }
         private void ChangeName(Book book)
         {

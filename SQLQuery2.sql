@@ -1,0 +1,4 @@
+﻿select * from TypesBook, TitleBook
+
+
+
