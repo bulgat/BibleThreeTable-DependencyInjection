@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -35,7 +36,7 @@ namespace ThreeBook.Models
             bookProd.Count = 51;
             var koll = bookProd?.Name ?? "Error";
             System.Diagnostics.Debug.WriteLine("002 =" + koll);
-
+            /*
             switch (bookProd.Count)
             {
                 case 12:
@@ -44,13 +45,24 @@ namespace ThreeBook.Models
                 case 50:
                     //System.Diagnostics.Debug.WriteLine("003 =" + intValue);
                     break;
-                //case var intValue when intValue > 50:
-                   // break;
+                case var intValue when intValue > 50:
+                    break;
                 //case int intValue when intValue > 50:
                 default:
                     break;
-            };
+            };*/
+            BlockingCollection<int> bCollection = new BlockingCollection<int>(boundedCapacity: 2);
+            bCollection.Add(1);
+            bCollection.Add(2);
 
+            if (bCollection.TryAdd(3, TimeSpan.FromSeconds(1)))
+            {
+                System.Diagnostics.Debug.WriteLine("Item added");
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine("Item does not added");
+            }
         }
         private void ChangeName(Book book)
         {
