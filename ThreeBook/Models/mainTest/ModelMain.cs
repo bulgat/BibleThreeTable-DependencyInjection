@@ -2,6 +2,8 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Web;
 using ThreeBook.Models.mainTest;
 
@@ -55,7 +57,7 @@ namespace ThreeBook.Models
             bCollection.Add(1);
             bCollection.Add(2);
 
-            if (bCollection.TryAdd(3, TimeSpan.FromSeconds(1)))
+            if (bCollection.TryAdd(4, TimeSpan.FromSeconds(1)))
             {
                 System.Diagnostics.Debug.WriteLine("Item added");
             }
@@ -63,6 +65,49 @@ namespace ThreeBook.Models
             {
                 System.Diagnostics.Debug.WriteLine("Item does not added");
             }
+            int progress = 0;
+            // A simple blocking consumer with no cancellation.
+            Task.Run(() =>
+            {
+                int ii = -1;
+                while (!bCollection.IsCompleted)
+                {
+                    try
+                    {
+                        ii = bCollection.Take();
+                        ii++;
+                    }
+                    catch (InvalidOperationException)
+                    {
+                        System.Diagnostics.Debug.WriteLine("Adding was completed!");
+                        break;
+                    }
+                    System.Diagnostics.Debug.WriteLine("Take:{0} ", ii);
+
+                    progress++;
+                    System.Diagnostics.Debug.WriteLine("progress:{0} ", progress);
+                    // Simulate a slow consumer. This will cause
+                    // collection to fill up fast and thus Adds wil block.
+                    Thread.SpinWait(100000);
+                }
+                System.Diagnostics.Debug.WriteLine("\r\nNo more items to take. Press the Enter key to exit.");
+            });
+
+            // Increase or decrease this value as desired.
+            int itemsToAdd = 8;
+            // A simple blocking producer with no cancellation.
+            Task.Run(() =>
+            {
+                for (int i0 = 0; i0 < itemsToAdd; i0++)
+                {
+                    bCollection.Add(i);
+                    Console.WriteLine("Add:{0} Count={1}", i0, bCollection.Count);
+                }
+
+                // See documentation for this method.
+                bCollection.CompleteAdding();
+            });
+            Console.WriteLine("===============================================" );
         }
         private void ChangeName(Book book)
         {

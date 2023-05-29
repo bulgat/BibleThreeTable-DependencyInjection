@@ -18,6 +18,9 @@ namespace ThreeBook.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
+            //Person tom = new Person("Tom", 35);
+            //Person bob = new Person("Bob", 16);
+
             var ListReg = (from a in context.TypesBook select a).ToList();
             ModelMain modelMain = new ModelMain();
 
@@ -212,4 +215,25 @@ namespace ThreeBook.Controllers
         }
 
     }
+    /*
+    public class AgeValidationAttribute : Attribute
+    {
+        public int Age { get; }
+        public AgeValidationAttribute() { }
+        public AgeValidationAttribute(int age) => Age = age;
+    }
+    */
+    /*
+    [AgeValidation(18)]
+    public class Person
+    {
+        public string Name { get; }
+        public int Age { get; set; }
+        public Person(string name, int age)
+        {
+            Name = name;
+            Age = age;
+        }
+    }
+    */
 }
