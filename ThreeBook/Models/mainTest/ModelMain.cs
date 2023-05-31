@@ -36,8 +36,27 @@ namespace ThreeBook.Models
             Book bookProd =  new Book();
             bookProd.Name = "null=============";
             bookProd.Count = 51;
-            var koll = bookProd?.Name ?? "Error";
+            string koll = bookProd?.Name ?? "Error";
             System.Diagnostics.Debug.WriteLine("002 =" + koll);
+            Book[] book_ar = { 
+                new Book(),
+                new Book("krik"),
+                new Book(true), 
+                new Book(true) 
+            };
+            var stop = book_ar.Where(a => a?.Name?[0]== 'k').ToList();
+
+            System.Diagnostics.Debug.WriteLine("02  name L =" + stop.Count);
+            System.Diagnostics.Debug.WriteLine("03  name L =" + stop[0].Name);
+            System.Diagnostics.Debug.WriteLine("04  name =" + nameof(bookProd));
+            System.Diagnostics.Debug.WriteLine("05  name =" + nameof(book_ar));
+            System.Diagnostics.Debug.WriteLine("06  name =" + nameof(i));
+            System.Diagnostics.Debug.WriteLine("07  name =" + nameof(job));
+            System.Diagnostics.Debug.WriteLine("08  name =" + nameof(bookProd.Read));
+            System.Diagnostics.Debug.WriteLine("09  name =" + nameof(List<int>));
+
+            var ttt = FilterBookRead(book_ar);
+            System.Diagnostics.Debug.WriteLine("10  count =" + ttt.Count());
             /*
             switch (bookProd.Count)
             {
@@ -107,6 +126,8 @@ namespace ThreeBook.Models
                 // See documentation for this method.
                 bCollection.CompleteAdding();
             });
+
+            
             Console.WriteLine("===============================================" );
         }
         private void ChangeName(Book book)
@@ -123,6 +144,17 @@ namespace ThreeBook.Models
             book0000.Name = "Sting Ping Floid";
             book = book0000;
         }
-
+        public static IEnumerable<Book> FilterBookRead(IEnumerable<Book> book_ar)
+        {
+            foreach(Book book in book_ar)
+            {
+                if (book.Read)
+                {
+                    System.Diagnostics.Debug.WriteLine("11  name =" + book.Name);
+                    yield return book;
+                }
+            }
+            //yield return new Book();
+        }
     }
 }

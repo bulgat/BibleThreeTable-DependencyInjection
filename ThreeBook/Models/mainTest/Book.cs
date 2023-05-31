@@ -9,5 +9,18 @@ namespace ThreeBook.Models.mainTest
     {
         public string Name { get; set; }
         public int Count { get; set; }
+        public bool Read { get; set; }
+        public Book() { 
+        
+        }
+        public Book(string name)
+        {
+        this.Name = name;
+        }
+        public Book(bool read)
+        {
+            this.Read = read;
+        }
+
     }
 }
