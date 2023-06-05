@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using ThreeBook.Models.mainTest;
+using static System.Math;
 
 namespace ThreeBook.Models
 {
@@ -23,7 +24,7 @@ namespace ThreeBook.Models
             ChangeName(ref book);
             System.Diagnostics.Debug.WriteLine("REF name =" + book.Name);
             int i = 5;
-            System.Diagnostics.Debug.WriteLine("00 =" +i);
+            System.Diagnostics.Debug.WriteLine("00 =" +i+"    PI"+PI);
             long kol = (long)i;
             System.Diagnostics.Debug.WriteLine("000 =" + kol);
             object o = i;
