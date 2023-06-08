@@ -31,6 +31,7 @@ namespace ThreeBook.Models
             System.Diagnostics.Debug.WriteLine("01 ="+o);
             long job = (int)o;
             System.Diagnostics.Debug.WriteLine("001 =" + job);
+            book.Name = "крикунов";
             //long j = (long)o;
             //System.Diagnostics.Debug.WriteLine("REF name j =" + j);
 
@@ -131,6 +132,7 @@ namespace ThreeBook.Models
             
             Console.WriteLine("===============================================" );
         }
+       
         private void ChangeName(Book book)
         {
             book.Name = "Krik";
@@ -158,4 +160,15 @@ namespace ThreeBook.Models
             //yield return new Book();
         }
     }
+    /*
+    public class MyKol : Attribute
+    {
+        public MyKol(int count)
+        {
+            Console.WriteLine("==============================================   count ="+ count);
+            this.Count = count;
+        }
+        public int Count;
+    }
+    */
 }

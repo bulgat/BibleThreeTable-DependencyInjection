@@ -222,6 +222,7 @@
       <DependentUpon>ListBook.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\mainTest\Book.cs" />
+    <Compile Include="Models\mainTest\MyBook.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\mainTest\ModelMain.cs" />
     <Compile Include="Models\Table.cs">

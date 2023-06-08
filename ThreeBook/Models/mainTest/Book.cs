@@ -5,6 +5,7 @@ using System.Web;
 
 namespace ThreeBook.Models.mainTest
 {
+    [MyBook(13)]
     public class Book
     {
         public string Name { get; set; }
@@ -13,6 +14,7 @@ namespace ThreeBook.Models.mainTest
         public Book() { 
         
         }
+        
         public Book(string name)
         {
         this.Name = name;
