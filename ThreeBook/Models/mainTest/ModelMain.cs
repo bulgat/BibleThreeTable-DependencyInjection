@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.ModelBinding;
 using ThreeBook.Models.mainTest;
 using static System.Math;
 
@@ -16,9 +17,10 @@ namespace ThreeBook.Models
         {
             Dictionary<string, Book> dictionaryBook = new Dictionary<string, Book>() { ["kol"] = new Book { } };
 
-            System.Diagnostics.Debug.WriteLine(" name dict book = " + dictionaryBook["kol"]);
+            System.Diagnostics.Debug.WriteLine("000 name dict book = " + dictionaryBook["kol"]);
             Book book = new Book();
-            book.Name = "kol";
+            book.Name = "k";
+            System.Diagnostics.Debug.WriteLine("000 name dict book = ");
             ChangeName(book);
             System.Diagnostics.Debug.WriteLine(" name ="+ book.Name);
             ChangeName(ref book);

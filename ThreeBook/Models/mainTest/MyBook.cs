@@ -7,14 +7,16 @@ namespace ThreeBook.Models.mainTest
 {
     public class MyBook : Attribute
     {
- 
-        public MyBook(int count)
+        public string Name { get; set; }
+ public int Count { get; set; }
+        public MyBook(int count, string name)
         {
             Console.WriteLine("==============================================   count =" + count);
             this.Count = count;
+            this.Name = name;
             //return this;
         }
-        public int Count;
+        
     }
 
 }

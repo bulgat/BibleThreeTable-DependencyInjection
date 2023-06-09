@@ -1,14 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
 namespace ThreeBook.Models.mainTest
 {
-    [MyBook(13)]
+    [MyBook(13,"sdfsd")]
     public class Book
     {
+        [Required(ErrorMessage = "Введите имя")]
+        [MinLength(2, ErrorMessage = "Слишком маленькое название")]
+        [MaxLength(22,ErrorMessage ="Слишком длинное название")]
         public string Name { get; set; }
+        [Range(0, 10,ErrorMessage ="Недопустимый диапозон")]
         public int Count { get; set; }
         public bool Read { get; set; }
         public Book() { 
