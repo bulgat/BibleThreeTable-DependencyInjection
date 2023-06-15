@@ -57,7 +57,7 @@ namespace ThreeBook.Models
             System.Diagnostics.Debug.WriteLine("06  name =" + nameof(i));
             System.Diagnostics.Debug.WriteLine("07  name =" + nameof(job));
             System.Diagnostics.Debug.WriteLine("08  name =" + nameof(bookProd.Read));
-            System.Diagnostics.Debug.WriteLine("09  name =" + nameof(List<int>));
+            System.Diagnostics.Debug.WriteLine("09 _________ name =" + nameof(List<int>)+ "   book_ar.count ="+ book_ar.Count());
 
             var ttt = FilterBookRead(book_ar);
             System.Diagnostics.Debug.WriteLine("10  count =" + ttt.Count());
@@ -153,9 +153,14 @@ namespace ThreeBook.Models
         {
             foreach(Book book in book_ar)
             {
+                System.Diagnostics.Debug.WriteLine("-00011  book.Read =" + book.Read);
                 if (book.Read)
                 {
-                    System.Diagnostics.Debug.WriteLine("11  name =" + book.Name);
+                    System.Diagnostics.Debug.WriteLine("-11  name =" + book.Name);
+                    yield return book;
+                    System.Diagnostics.Debug.WriteLine("-22  name =" + book.Name);
+                    yield return book;
+                    System.Diagnostics.Debug.WriteLine("-33  name =" + book.Name);
                     yield return book;
                 }
             }
