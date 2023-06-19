@@ -5,10 +5,12 @@ using System.Web;
 
 namespace ThreeBook.Models.mainTest
 {
-    public class MyBook : Attribute
+    public class MyBook : Attribute,IMyBook
     {
         public string Name { get; set; }
- public int Count { get; set; }
+        public int Count { get; set; }
+
+
         public MyBook(int count, string name)
         {
             Console.WriteLine("==============================================   count =" + count);
@@ -16,7 +18,9 @@ namespace ThreeBook.Models.mainTest
             this.Name = name;
             //return this;
         }
+        public MyBook(IBook book) { 
         
+        }
     }
 
 }

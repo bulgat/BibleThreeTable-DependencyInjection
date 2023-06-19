@@ -7,7 +7,7 @@ using System.Web;
 namespace ThreeBook.Models.mainTest
 {
     [MyBook(13,"sdfsd")]
-    public class Book
+    public class Book:IBook
     {
         [Required(ErrorMessage = "Введите имя")]
         [MinLength(2, ErrorMessage = "Слишком маленькое название")]
@@ -22,12 +22,17 @@ namespace ThreeBook.Models.mainTest
         
         public Book(string name)
         {
-        this.Name = name;
+            this.Name = name;
         }
         public Book(bool read)
         {
             this.Read = read;
         }
 
+        void IBook.Read()
+        {
+            System.Diagnostics.Debug.WriteLine(" Name = "+GetType().Name);
+
+        }
     }
 }

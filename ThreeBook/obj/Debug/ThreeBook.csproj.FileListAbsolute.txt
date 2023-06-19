@@ -511,3 +511,13 @@ C:\Users\Pizza\Documents\GitHub\BibleThreeTable\ThreeBook\obj\Debug\ThreeBook.cs
 C:\Users\Pizza\Documents\GitHub\BibleThreeTable\ThreeBook\obj\Debug\ThreeBook.csproj.CopyComplete
 C:\Users\Pizza\Documents\GitHub\BibleThreeTable\ThreeBook\obj\Debug\ThreeBook.dll
 C:\Users\Pizza\Documents\GitHub\BibleThreeTable\ThreeBook\obj\Debug\ThreeBook.pdb
+C:\Users\Pizza\Documents\GitHub\BibleThreeTable\ThreeBook\bin\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\Pizza\Documents\GitHub\BibleThreeTable\ThreeBook\bin\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\Pizza\Documents\GitHub\BibleThreeTable\ThreeBook\bin\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\Pizza\Documents\GitHub\BibleThreeTable\ThreeBook\bin\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\Pizza\Documents\GitHub\BibleThreeTable\ThreeBook\bin\System.Threading.Tasks.Extensions.dll
+C:\Users\Pizza\Documents\GitHub\BibleThreeTable\ThreeBook\bin\Microsoft.Bcl.AsyncInterfaces.xml
+C:\Users\Pizza\Documents\GitHub\BibleThreeTable\ThreeBook\bin\Microsoft.Extensions.DependencyInjection.xml
+C:\Users\Pizza\Documents\GitHub\BibleThreeTable\ThreeBook\bin\Microsoft.Extensions.DependencyInjection.Abstractions.xml
+C:\Users\Pizza\Documents\GitHub\BibleThreeTable\ThreeBook\bin\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\Pizza\Documents\GitHub\BibleThreeTable\ThreeBook\bin\System.Threading.Tasks.Extensions.xml
