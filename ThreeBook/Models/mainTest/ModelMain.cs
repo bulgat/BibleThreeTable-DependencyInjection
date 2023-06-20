@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.ModelBinding;
+using System.Web.Services.Description;
 using ThreeBook.Models.mainTest;
 using static System.Math;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace ThreeBook.Models
 {
@@ -15,6 +18,26 @@ namespace ThreeBook.Models
     {
         public ModelMain()
         {
+            var serverCollection = new Microsoft.Extensions.DependencyInjection.ServiceCollection();
+            serverCollection.AddTransient<IBook, Book>();
+            serverCollection.AddScoped<IBook, Book>();
+            serverCollection.AddSingleton<IBook, Book>();
+
+            var container = serverCollection.BuildServiceProvider();
+
+            
+            Book bookContainer0 = container.GetService<Book>();
+            IBook bookContainer = container.GetRequiredService<IBook>();
+            IEnumerable<IBook> bookAll_ar = container.GetRequiredService<IEnumerable<IBook>>();
+
+            System.Diagnostics.Debug.WriteLine("0000   dict book = " + bookAll_ar.Count());
+            using(var kolBook = new Book())
+            {
+                kolBook.Name = "STOP-stop";
+                System.Diagnostics.Debug.WriteLine("0000 name kolBook = " + kolBook.Name);
+            }
+
+
             Dictionary<string, Book> dictionaryBook = new Dictionary<string, Book>() { ["kol"] = new Book { } };
 
             System.Diagnostics.Debug.WriteLine("000 name dict book = " + dictionaryBook["kol"]);

@@ -7,7 +7,7 @@ using System.Web;
 namespace ThreeBook.Models.mainTest
 {
     [MyBook(13,"sdfsd")]
-    public class Book:IBook
+    public class Book:IBook,IDisposable
     {
         [Required(ErrorMessage = "Введите имя")]
         [MinLength(2, ErrorMessage = "Слишком маленькое название")]
@@ -33,6 +33,11 @@ namespace ThreeBook.Models.mainTest
         {
             System.Diagnostics.Debug.WriteLine(" Name = "+GetType().Name);
 
+        }
+
+        public void Dispose()
+        {
+            //throw new NotImplementedException();
         }
     }
 }
