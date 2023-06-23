@@ -22,5 +22,8 @@ function GetFirstBook() {
     console.log("00000 = ", t);
     console.log("00001 = ", tt);
     console.log("00002 = ", ttt);
-    console.log("00003 = ", kol);
+    
+    
 }
+console.log("00003   " );
+document.cookie = "deletename=kol_; expires=Thu, 18 Dec 2024 12:00:00 UTC; path=/";

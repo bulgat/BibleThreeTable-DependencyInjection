@@ -18,6 +18,9 @@ namespace ThreeBook.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
+            string sessionId = HttpContext.Session.SessionID;
+            
+            System.Diagnostics.Debug.WriteLine("session = "+ sessionId);
             //Person tom = new Person("Tom", 35);
             //Person bob = new Person("Bob", 16);
 
@@ -69,7 +72,12 @@ namespace ThreeBook.Controllers
         /// <returns></returns>
         public ActionResult Delete(int id)
         {
-
+            Session["DeleteName"] = Request.Form["DeleteName"];
+            var filePath = Request.FilePath;
+            var cook = Request.Cookies;
+            var cookDelete = Request.Cookies["deletename"];
+            var stop0 = Session["DeleteName"];
+            
             var card = (from a in context.TypesBook where a.Id == id select a).First();
             return View(card);
         }
