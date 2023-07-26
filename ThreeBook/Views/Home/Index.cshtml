@@ -5,7 +5,7 @@
 }
 
 <h2>Список категорий нашей библиотеки</h2>
-<img src="~/Content/book.jpg"/>
+<img src="~/Content/book.jpg" />
 
 <p>
     @Html.ActionLink("Создать новую категорию", "Create")
@@ -13,26 +13,29 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.title) 
+            @Html.DisplayNameFor(model => model.title)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-           
-            @Html.ActionLink(@Html.DisplayFor(modelItem => item.title).ToString(), "ListBooks", new { id = item.Id }) |
-        </td>
-        <td>
-            @Html.ActionLink("Редактирование", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Посмотреть", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Удалить", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
-    
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+
+                @Html.ActionLink(@Html.DisplayFor(modelItem => item.title).ToString(), "ListBooks", new { id = item.Id }) |
+            </td>
+            <td>
+                @Html.ActionLink("Редактирование", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Посмотреть", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
 </table>
 <button onclick="GetFirstBook();">Get first Book</button>
 <button onclick="GetLastBook();">Get last Book</button>
+<button onclick="fetchMoviesJSON();">Get middle Book</button>
+
 <script src="~/Scripts/IndexBible.js"></script>

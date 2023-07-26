@@ -40,10 +40,32 @@ function GetLastBook() {
     }).then(r => { console.log("===", r); });
 
     console.log("03  s = " )
-   // let response =   fetch('/Home/LastBook', { method: 'GET' });
+   //let response =   await (fetch('/Home/LastBook', { method: 'GET' }));
    // let response = await fetch('/Home/LastBook' );
   //  var data =  await response.json();
-    console.log("00 r data = ", data);
+   
 }
+async function fetchMoviesJSON() {
+    const response = await fetch('/Home/LastBook', { method: 'GET' });
+    const movies = await response.json();
+    console.log("0 data = ", movies);
+
+    var k = 5;
+    var kol =()=>{
+        return new Promise((resolve, reject) => {
+            if (k == 0) {
+                resolve(7);
+            } else {
+                reject(5);
+            }
+        });
+    }
+   // var ttt = kol;
+    kol().then(i => { console.log("ii =", i) }).catch(u => { console.log("uuu =", u) });
+
+    return movies;
+}
+
+
 
 document.cookie = "deletename=kol_; expires=Thu, 18 Dec 2024 12:00:00 UTC; path=/";
