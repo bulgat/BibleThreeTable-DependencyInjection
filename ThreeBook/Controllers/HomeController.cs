@@ -221,7 +221,12 @@ namespace ThreeBook.Controllers
             string name = "FirstBookAuthor";
             return Json(name, JsonRequestBehavior.AllowGet);
         }
-
+        [HttpGet]
+        public JsonResult LastBook()
+        {
+            string name = "LastBookAuthor";
+            return Json(name, JsonRequestBehavior.AllowGet);
+        }
     }
     /*
     public class AgeValidationAttribute : Attribute
