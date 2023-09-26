@@ -24,17 +24,26 @@ namespace ThreeBook.Controllers
             //Person tom = new Person("Tom", 35);
             //Person bob = new Person("Bob", 16);
 
-            var ListReg = (from a in context.TypesBook select a).ToList();
+            List<TypesBook> ListReg = (from a in context.TypesBook select a).ToList();
             ModelMain modelMain = new ModelMain();
 
-            //var kol = context.Table.
-            var t = ("select * from [dbo].[Table]").ToList();
+            //select * from [dbo].[Table],[dbo].[TitleBook]  where [dbo].[Table].Id=17 order by [dbo].[Table].Id desc offset 10 rows
+            //List<Table> t = ("select * from [dbo].[Table]").ToList();
+            //select top 3  * from [dbo].[Table],[dbo].[TitleBook]  where [dbo].[Table].Id=17
 
-            //dc.Stroke<Order>(x => $"DELETE FROM {x} WHERE {x.Subtotal} = 0");
+            //var ttt = context.Table.SqlQuery("select [dbo].[Table].Id from [dbo].[Table],[dbo].[TitleBook]  where [dbo].[Table].Id=1").ToList<Table>();
+
+            var tt = ("select Id,uid,title from [dbo].[Table] where Id=1").ToList();
+
+            
 
             return View(ListReg);
         }
-
+        public ActionResult ListBookMore()
+        {
+            List<Table> tableList = context.Table.SqlQuery("Select * from [dbo].[Table]").ToList<Table>();
+            return View(tableList);
+        }
         /// <summary>
         /// Создать новую категорию.
         /// </summary>
@@ -129,7 +138,7 @@ namespace ThreeBook.Controllers
         public ActionResult Edit(int id)
         {
 
-            var card = (from a in context.TypesBook where a.Id == id select a).First();
+            TypesBook card = (from a in context.TypesBook where a.Id == id select a).First();
             return View(card);
         }
         /// <summary>
@@ -142,7 +151,7 @@ namespace ThreeBook.Controllers
         public ActionResult Edit(int id, FormCollection collection)
         {
 
-            var cardReglament = (from a in context.TypesBook where a.Id == id select a).First();
+            TypesBook cardReglament = (from a in context.TypesBook where a.Id == id select a).First();
             try
             {
                 UpdateModel(cardReglament);
@@ -164,9 +173,10 @@ namespace ThreeBook.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public ActionResult ListBooks(int id)
+        public ActionResult ListBooks(int? id)
         {
-            var ListReg = (from a in context.TitleBook where a.uid==id select a).ToList();
+            int Id = Convert.ToInt32(id);
+            var ListReg = (from a in context.TitleBook where a.uid== Id select a).ToList();
             ViewBag.uid = ListReg.FirstOrDefault().uid;
             return View(ListReg);
         }
@@ -176,12 +186,12 @@ namespace ThreeBook.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public ActionResult ListBooksCreate(int id)
+        public ActionResult ListBooksCreate(int? id)
         {
-
+            int Id = Convert.ToInt32(id);
 
             var titleBoook = new TitleBook();
-            titleBoook.uid = id;
+            titleBoook.uid = Id;
             return View(titleBoook);
         }
         /// <summary>
@@ -216,7 +226,7 @@ namespace ThreeBook.Controllers
         /// <returns></returns>
         public ActionResult ContentBook(int id)
         {
-            var ListReg = (from a in context.Table where a.uid == id select a).ToList();
+            List<Table> ListReg = (from a in context.Table where a.uid == id select a).ToList();
 
             return View(ListReg);
         }

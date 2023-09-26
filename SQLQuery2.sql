@@ -1,4 +1,1 @@
-﻿select * from TypesBook, TitleBook
-
-
-
+﻿Select * from [dbo].[Table]

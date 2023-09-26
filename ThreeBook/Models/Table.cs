@@ -17,7 +17,8 @@ namespace ThreeBook.Models
         public int Id { get; set; }
         public Nullable<int> uid { get; set; }
         public string title { get; set; }
-    
+
+        public int cost { get; set; }
         public virtual TitleBook TitleBook { get; set; }
     }
 }
