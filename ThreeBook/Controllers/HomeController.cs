@@ -30,8 +30,12 @@ namespace ThreeBook.Controllers
             //select * from [dbo].[Table],[dbo].[TitleBook]  where [dbo].[Table].Id=17 order by [dbo].[Table].Id desc offset 10 rows
             //List<Table> t = ("select * from [dbo].[Table]").ToList();
             //select top 3  * from [dbo].[Table],[dbo].[TitleBook]  where [dbo].[Table].Id=17
-
+            //select max(cost) from [dbo].[Table] 
+            //select max(cost) as superCost from[dbo].[Table]
+            //select max(dd.rating) from (select * from [dbo].[TitleBook] a union all select * from [dbo].[Table] b) as dd
             //var ttt = context.Table.SqlQuery("select [dbo].[Table].Id from [dbo].[Table],[dbo].[TitleBook]  where [dbo].[Table].Id=1").ToList<Table>();
+            //select * from (select max(dd.rating) as fff from (select b.Id,a.rating,a.title,b.cost from [dbo].[TitleBook] a LEFT JOIN [dbo].[Table] b on a.Id=b.uid) dd) cc
+            //select * from (select b.Id,a.rating,a.title,b.cost from [dbo].[TitleBook] a LEFT JOIN [dbo].[Table] b on a.Id=b.uid) dd where dd.rating=(select max(gg.rating) from [dbo].[TitleBook] gg)
 
             var tt = ("select Id,uid,title from [dbo].[Table] where Id=1").ToList();
 

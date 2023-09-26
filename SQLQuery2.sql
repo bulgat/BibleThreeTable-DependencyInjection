@@ -1,1 +1,1 @@
-﻿Select * from [dbo].[Table]
+﻿select * from [dbo].TitleBook
