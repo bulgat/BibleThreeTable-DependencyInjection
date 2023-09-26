@@ -27,6 +27,11 @@ namespace ThreeBook.Controllers
             var ListReg = (from a in context.TypesBook select a).ToList();
             ModelMain modelMain = new ModelMain();
 
+            //var kol = context.Table.
+            var t = ("select * from [dbo].[Table]").ToList();
+
+            //dc.Stroke<Order>(x => $"DELETE FROM {x} WHERE {x.Subtotal} = 0");
+
             return View(ListReg);
         }
 
@@ -212,6 +217,7 @@ namespace ThreeBook.Controllers
         public ActionResult ContentBook(int id)
         {
             var ListReg = (from a in context.Table where a.uid == id select a).ToList();
+
             return View(ListReg);
         }
 
