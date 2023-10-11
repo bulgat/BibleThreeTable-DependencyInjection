@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using ThreeBook.Models;
@@ -43,6 +44,8 @@ namespace ThreeBook.Controllers
 
             return View(ListReg);
         }
+
+
         public ActionResult ListBookMore()
         {
             List<Table> tableList = context.Table.SqlQuery("Select * from [dbo].[Table]").ToList<Table>();
