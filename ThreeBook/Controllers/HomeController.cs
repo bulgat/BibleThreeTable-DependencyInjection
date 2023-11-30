@@ -159,6 +159,9 @@ namespace ThreeBook.Controllers
         {
 
             TypesBook cardReglament = (from a in context.TypesBook where a.Id == id select a).First();
+            cardReglament.Description = "Stop";
+
+            //EntityTypeBuilder < Company >
             try
             {
                 UpdateModel(cardReglament);
