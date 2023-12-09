@@ -4,10 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using ThreeBook.ActionFilter;
 using ThreeBook.Models;
 
 namespace ThreeBook.Controllers
 {
+    [LogActionFilter]
     public class HomeController : Controller
     {
         // Модель.
@@ -17,6 +19,7 @@ namespace ThreeBook.Controllers
         /// Список категорий
         /// </summary>
         /// <returns></returns>
+        [OutputCache(Duration = 10)]
         public ActionResult Index()
         {
             string sessionId = HttpContext.Session.SessionID;
@@ -40,7 +43,7 @@ namespace ThreeBook.Controllers
 
             var tt = ("select Id,uid,title from [dbo].[Table] where Id=1").ToList();
 
-            
+            ViewBag.DateTime = DateTime.Now.ToString("T");
 
             return View(ListReg);
         }

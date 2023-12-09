@@ -15,10 +15,10 @@
         <th>
             @Html.DisplayNameFor(model => model.title)
         </th>
-        <th></th>
+        <th>@ViewBag.DateTime</th>
     </tr>
 
-    @foreach (var item in Model)
+    @foreach (ThreeBook.Models.TypesBook item in Model)
     {
         <tr>
             <td>

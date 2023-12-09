@@ -84,21 +84,7 @@ namespace ThreeBook.Models
 
             var ttt = FilterBookRead(book_ar);
             System.Diagnostics.Debug.WriteLine("10  count =" + ttt.Count());
-            /*
-            switch (bookProd.Count)
-            {
-                case 12:
-                    System.Diagnostics.Debug.WriteLine("003 =  12" );
-                    break;
-                case 50:
-                    //System.Diagnostics.Debug.WriteLine("003 =" + intValue);
-                    break;
-                case var intValue when intValue > 50:
-                    break;
-                //case int intValue when intValue > 50:
-                default:
-                    break;
-            };*/
+         
             BlockingCollection<int> bCollection = new BlockingCollection<int>(boundedCapacity: 2);
             bCollection.Add(1);
             bCollection.Add(2);
@@ -190,15 +176,5 @@ namespace ThreeBook.Models
             //yield return new Book();
         }
     }
-    /*
-    public class MyKol : Attribute
-    {
-        public MyKol(int count)
-        {
-            Console.WriteLine("==============================================   count ="+ count);
-            this.Count = count;
-        }
-        public int Count;
-    }
-    */
+
 }
