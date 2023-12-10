@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using ThreeBook.ActionFilter;
 using ThreeBook.Models;
+using ThreeBook.ViewModel;
 
 namespace ThreeBook.Controllers
 {
@@ -44,6 +46,16 @@ namespace ThreeBook.Controllers
             var tt = ("select Id,uid,title from [dbo].[Table] where Id=1").ToList();
 
             ViewBag.DateTime = DateTime.Now.ToString("T");
+
+            AppMappingProfile conf = new AppMappingProfile();
+            var mapper = new Mapper(AppMappingProfile.config);
+
+            var viewTypeBook = mapper.Map<TypesBook, ViewTypeBook>(ListReg.First());
+            ViewBag.title = viewTypeBook.title;
+            //;
+
+            //var person = IMapper.Map<TypesBook>(ViewTypeBook);
+
 
             return View(ListReg);
         }
