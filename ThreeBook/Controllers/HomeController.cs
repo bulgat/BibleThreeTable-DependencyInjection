@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -49,14 +51,26 @@ namespace ThreeBook.Controllers
 
             AppMappingProfile conf = new AppMappingProfile();
             var mapper = new Mapper(AppMappingProfile.config);
+            
+            //mapper.Map<TypesBook>()
 
             var viewTypeBook = mapper.Map<TypesBook, ViewTypeBook>(ListReg.First());
             ViewBag.title = viewTypeBook.title;
             //;
 
-            //var person = IMapper.Map<TypesBook>(ViewTypeBook);
+            //var person = context.TitleBook.Where(a=>a.Id>0).ProjectTo<TitleBook>(mapper.ConfigurationProvider).ToList();
+            var person = context.TitleBook.ProjectTo<ViewTitleBook>(mapper.ConfigurationProvider).ToList();
 
+            int? krik = 456;
+            System.Diagnostics.Debug.WriteLine("001;;;;;;;;;;;;;;;=0006 " + krik.HasValue);
+            krik = null;
+            System.Diagnostics.Debug.WriteLine("002;;;;;;;;;;;;;;;=0006 " + krik.HasValue);
 
+            string kol = "stop";
+            string kol0 = "C";
+            System.Diagnostics.Debug.WriteLine("004;;;;;;;;;;;;;=0006 " +kol.Equals("stop",StringComparison.InvariantCultureIgnoreCase));
+            System.Diagnostics.Debug.WriteLine("005;;;;;;;;;;;;;=0006 " + kol.Equals("Stop", StringComparison.OrdinalIgnoreCase));
+            System.Diagnostics.Debug.WriteLine("006;;;;;;;;;;;;;=0006 " + kol0.Equals("С", StringComparison.OrdinalIgnoreCase));
             return View(ListReg);
         }
 
