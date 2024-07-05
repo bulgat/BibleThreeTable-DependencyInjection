@@ -24,6 +24,7 @@ namespace ThreeBook.Controllers
         /// </summary>
         /// <returns></returns>
         [OutputCache(Duration = 10)]
+        //[ValidateAntiForgeryToken]
         public ActionResult Index()
         {
             string sessionId = HttpContext.Session.SessionID;
@@ -146,6 +147,7 @@ namespace ThreeBook.Controllers
             try
             {
                 context.TypesBook.Remove(card);
+
                 context.SaveChanges();
                 return RedirectToAction("");
 
@@ -175,6 +177,7 @@ namespace ThreeBook.Controllers
         {
 
             TypesBook card = (from a in context.TypesBook where a.Id == id select a).First();
+      
             return View(card);
         }
         /// <summary>
@@ -190,9 +193,11 @@ namespace ThreeBook.Controllers
             TypesBook cardReglament = (from a in context.TypesBook where a.Id == id select a).First();
             cardReglament.Description = "Stop";
 
+            var isAgeModified = context.Entry(cardReglament).Property("Description").IsModified;
             //EntityTypeBuilder < Company >
             try
             {
+
                 UpdateModel(cardReglament);
                 context.SaveChanges();
                 return RedirectToAction("");
