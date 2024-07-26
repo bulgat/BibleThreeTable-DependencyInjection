@@ -3,6 +3,7 @@ using AutoMapper.QueryableExtensions;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -63,7 +64,7 @@ namespace ThreeBook.Controllers
             var person = context.TitleBook.ProjectTo<ViewTitleBook>(mapper.ConfigurationProvider).ToList();
 
             int? krik = 456;
-            System.Diagnostics.Debug.WriteLine("001;;;;;;;;;;;;;;;=0006 " + krik.HasValue);
+            
             krik = null;
             System.Diagnostics.Debug.WriteLine("002;;;;;;;;;;;;;;;=0006 " + krik.HasValue);
 
@@ -72,9 +73,25 @@ namespace ThreeBook.Controllers
             System.Diagnostics.Debug.WriteLine("004;;;;;;;;;;;;;=0006 " +kol.Equals("stop",StringComparison.InvariantCultureIgnoreCase));
             System.Diagnostics.Debug.WriteLine("005;;;;;;;;;;;;;=0006 " + kol.Equals("Stop", StringComparison.OrdinalIgnoreCase));
             System.Diagnostics.Debug.WriteLine("006;;;;;;;;;;;;;=0006 " + kol0.Equals("С", StringComparison.OrdinalIgnoreCase));
+            GetJoin();
+
+
             return View(ListReg);
         }
+        private void GetJoin()
+        {
+            var reg = context.TypesBook.FirstOrDefault();
+            var kol = context.TitleBook.FirstOrDefault();
+            var test = context.TypesBook.Join(
+                context.TitleBook,
+                p=>p.Id,
+                c=>c.Id,
+                (p,c) => new { Name = p.title, Title=c.Table }).FirstOrDefault();
 
+           
+
+            System.Diagnostics.Debug.WriteLine(reg+" = 001;;;;;;;;;;;; 006 = "+ kol);
+        }
 
         public ActionResult ListBookMore()
         {
