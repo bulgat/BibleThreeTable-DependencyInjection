@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Microsoft.Owin;
 using System;
 using System.Collections.Generic;
+using System.Configuration.Provider;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -47,7 +50,7 @@ namespace ThreeBook.Controllers
             //select * from (select max(dd.rating) as fff from (select b.Id,a.rating,a.title,b.cost from [dbo].[TitleBook] a LEFT JOIN [dbo].[Table] b on a.Id=b.uid) dd) cc
             //select * from (select b.Id,a.rating,a.title,b.cost from [dbo].[TitleBook] a LEFT JOIN [dbo].[Table] b on a.Id=b.uid) dd where dd.rating=(select max(gg.rating) from [dbo].[TitleBook] gg)
 
-            var tt = ("select Id,uid,title from [dbo].[Table] where Id=1").ToList();
+            var tet = ("select Id,uid,title from [dbo].[Table] where Id=1").ToList();
 
             ViewBag.DateTime = DateTime.Now.ToString("T");
 
@@ -75,6 +78,36 @@ namespace ThreeBook.Controllers
             System.Diagnostics.Debug.WriteLine("006;;;;;;;;;;;;;=0006 " + kol0.Equals("С", StringComparison.OrdinalIgnoreCase));
             GetJoin();
 
+            ///////
+            /*
+            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+            builder.DataSource = "localhost";
+            builder.InitialCatalog = "CSharpCornerDB";
+
+            //builder.TrustServerCertificate = true;
+            builder.UserID = "posgres";
+            builder.Password = "avaria";
+            SqlConnection _connection = new SqlConnection(builder.ConnectionString);
+            SqlCommand sqlCommand = new SqlCommand("select * from Player", _connection);
+            var reader = sqlCommand.ExecuteReader();
+            */
+            /*
+            string connectionString = "Data Source=(LocalDb)/MSSQLLocalDB;Initial Catalog=aspnet-ThreeBook-20160625095758;Integrated Security=SSPI"
+                ;// providerName = "System.Data.SqlClient";
+                    //     string str = "Data Source=(local);Initial Catalog=Northwind;"
+               // + "Integrated Security=SSPI";
+            string queryString = "SELECT OrderID, CustomerID FROM dbo.Orders;";
+            using (SqlConnection connection = new SqlConnection(
+                       connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                command.Connection.Open();
+                command.ExecuteNonQuery();
+            }
+            */
+
+
+            ///////
 
             return View(ListReg);
         }
@@ -89,6 +122,10 @@ namespace ThreeBook.Controllers
                 (p,c) => new { Name = p.title, Title=c.Table }).FirstOrDefault();
 
            
+            var oneInjection = context.Table.SqlQuery("Select * from [dbo].[Table] where Id = 1 or 1=1").ToList();
+            var secondInjection = context.Table.SqlQuery("Select * from [dbo].[Table] where Id >= 1-- And uid = 1").ToList();
+            var thirdInjection = context.Table.SqlQuery("Select * from [dbo].[Table] where Id = 1 union select * from [dbo].[TitleBook]").ToList();
+            var foInjection = context.Table.SqlQuery("Sleep(100)").ToList();
 
             System.Diagnostics.Debug.WriteLine(reg+" = 001;;;;;;;;;;;; 006 = "+ kol);
         }
@@ -157,7 +194,7 @@ namespace ThreeBook.Controllers
         /// <param name="collection"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id, System.Web.Mvc.FormCollection collection)
         {
 
             var card = (from a in context.TypesBook where a.Id == id select a).First();
@@ -204,7 +241,7 @@ namespace ThreeBook.Controllers
         /// <param name="collection"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, System.Web.Mvc.FormCollection collection)
         {
 
             TypesBook cardReglament = (from a in context.TypesBook where a.Id == id select a).First();
