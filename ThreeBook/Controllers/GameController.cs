@@ -18,5 +18,10 @@ namespace ThreeBook.Controllers
         {
             return "This is Post";
         }
+        [HttpPost]
+        public string GetCount(int Num)
+        {
+            return "This is Post = "+Num;
+        }
     }
 }
