@@ -1,0 +1,16 @@
+name: dockercompose9473298116648543939
+services:
+  threebook:
+    build:
+      context: C:\Users\Pizza\Documents\GitHub\BibleThreeTable\ThreeBook
+      dockerfile: Dockerfile
+    image: threebook
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 80
+      protocol: tcp
+networks:
+  default:
+    name: dockercompose9473298116648543939_default

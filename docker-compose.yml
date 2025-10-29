@@ -1,0 +1,6 @@
+services:
+  threebook:
+    image: ${DOCKER_REGISTRY-}threebook
+    build:
+      context: ThreeBook
+      dockerfile: Dockerfile

@@ -1,0 +1,16 @@
+services:
+  threebook:
+    image: threebook:dev
+    build:
+      args:
+        LAUNCHING_FROM_VS: true
+        BUILD_CONFIGURATION: Debug
+        source: obj/Docker/empty/
+      labels:
+        com.microsoft.created-by: "visual-studio"
+        com.microsoft.visual-studio.project-name: "ThreeBook"
+    volumes:
+      - C:\Users\Pizza\Documents\GitHub\BibleThreeTable\ThreeBook:C:\inetpub\wwwroot
+      - C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Remote Debugger:C:\remote_debugger:ro
+    entrypoint: cmd /c "start /B C:\\ServiceMonitor.exe w3svc & C:\\remote_debugger\\x64\\msvsmon.exe /noauth /anyuser /silent /nostatus /noclrwarn /nosecuritywarn /nofirewallwarn /nowowwarn /timeout:2147483646"
+

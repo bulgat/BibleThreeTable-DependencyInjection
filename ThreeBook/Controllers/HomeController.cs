@@ -8,11 +8,13 @@ using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using ThreeBook.ActionFilter;
 using ThreeBook.Models;
+using ThreeBook.Models.mainTest;
 using ThreeBook.ViewModel;
 
 namespace ThreeBook.Controllers
@@ -21,7 +23,7 @@ namespace ThreeBook.Controllers
     public class HomeController : Controller
     {
         // Модель.
-        DataBooksEntities2 context = new DataBooksEntities2();
+        DataBooksEntities2 _context = new DataBooksEntities2();
 
         /// <summary>
         /// Список категорий
@@ -37,7 +39,7 @@ namespace ThreeBook.Controllers
             //Person tom = new Person("Tom", 35);
             //Person bob = new Person("Bob", 16);
 
-            List<TypesBook> ListReg = (from a in context.TypesBook select a).ToList();
+            List<TypesBook> ListReg = (from a in _context.TypesBook select a).ToList();
             ModelMain modelMain = new ModelMain();
 
             //select * from [dbo].[Table],[dbo].[TitleBook]  where [dbo].[Table].Id=17 order by [dbo].[Table].Id desc offset 10 rows
@@ -64,7 +66,7 @@ namespace ThreeBook.Controllers
             //;
 
             //var person = context.TitleBook.Where(a=>a.Id>0).ProjectTo<TitleBook>(mapper.ConfigurationProvider).ToList();
-            var person = context.TitleBook.ProjectTo<ViewTitleBook>(mapper.ConfigurationProvider).ToList();
+            var person = _context.TitleBook.ProjectTo<ViewTitleBook>(mapper.ConfigurationProvider).ToList();
 
             int? krik = 456;
             
@@ -78,6 +80,9 @@ namespace ThreeBook.Controllers
             System.Diagnostics.Debug.WriteLine("006;;;;;;;;;;;;;=0006 " + kol0.Equals("С", StringComparison.OrdinalIgnoreCase));
             GetJoin();
 
+            Book book = new Book();
+            Type myBook = typeof(Book);
+            ConstructorInfo t = myBook.GetConstructor(new Type[] { });
             ///////
             /*
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
@@ -113,26 +118,26 @@ namespace ThreeBook.Controllers
         }
         private void GetJoin()
         {
-            var reg = context.TypesBook.FirstOrDefault();
-            var kol = context.TitleBook.FirstOrDefault();
-            var test = context.TypesBook.Join(
-                context.TitleBook,
+            var reg = _context.TypesBook.FirstOrDefault();
+            var kol = _context.TitleBook.FirstOrDefault();
+            var test = _context.TypesBook.Join(
+                _context.TitleBook,
                 p=>p.Id,
                 c=>c.Id,
                 (p,c) => new { Name = p.title, Title=c.Table }).FirstOrDefault();
 
            
-            var oneInjection = context.Table.SqlQuery("Select * from [dbo].[Table] where Id = 1 or 1=1").ToList();
-            var secondInjection = context.Table.SqlQuery("Select * from [dbo].[Table] where Id >= 1-- And uid = 1").ToList();
-            var thirdInjection = context.Table.SqlQuery("Select * from [dbo].[Table] where Id = 1 union select * from [dbo].[TitleBook]").ToList();
-            var foInjection = context.Table.SqlQuery("Sleep(100)").ToList();
+            var oneInjection = _context.Table.SqlQuery("Select * from [dbo].[Table] where Id = 1 or 1=1").ToList();
+            var secondInjection = _context.Table.SqlQuery("Select * from [dbo].[Table] where Id >= 1-- And uid = 1").ToList();
+            var thirdInjection = _context.Table.SqlQuery("Select * from [dbo].[Table] where Id = 1 union select * from [dbo].[TitleBook]").ToList();
+            //var foInjection = context.Table.SqlQuery("Sleep(100)").ToList();
 
             System.Diagnostics.Debug.WriteLine(reg+" = 001;;;;;;;;;;;; 006 = "+ kol);
         }
 
         public ActionResult ListBookMore()
         {
-            List<Table> tableList = context.Table.SqlQuery("Select * from [dbo].[Table]").ToList<Table>();
+            List<Table> tableList = _context.Table.SqlQuery("Select * from [dbo].[Table]").ToList<Table>();
             return View(tableList);
         }
         /// <summary>
@@ -157,8 +162,8 @@ namespace ThreeBook.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    context.TypesBook.Add(card);
-                    context.SaveChanges();
+                    _context.TypesBook.Add(card);
+                    _context.SaveChanges();
                 }
 
             }
@@ -183,7 +188,7 @@ namespace ThreeBook.Controllers
             var cookDelete = Request.Cookies["deletename"];
             var stop0 = Session["DeleteName"];
             
-            var card = (from a in context.TypesBook where a.Id == id select a).First();
+            var card = (from a in _context.TypesBook where a.Id == id select a).First();
             return View(card);
         }
 
@@ -197,12 +202,12 @@ namespace ThreeBook.Controllers
         public ActionResult Delete(int id, System.Web.Mvc.FormCollection collection)
         {
 
-            var card = (from a in context.TypesBook where a.Id == id select a).First();
+            var card = (from a in _context.TypesBook where a.Id == id select a).First();
             try
             {
-                context.TypesBook.Remove(card);
+                _context.TypesBook.Remove(card);
 
-                context.SaveChanges();
+                _context.SaveChanges();
                 return RedirectToAction("");
 
             }
@@ -219,7 +224,7 @@ namespace ThreeBook.Controllers
         /// <returns></returns>
         public ActionResult Details(int id)
         {
-            var card = (from a in context.TypesBook where a.Id == id select a).First();
+            var card = (from a in _context.TypesBook where a.Id == id select a).First();
             return View(card);
         }
         /// <summary>
@@ -230,7 +235,7 @@ namespace ThreeBook.Controllers
         public ActionResult Edit(int id)
         {
 
-            TypesBook card = (from a in context.TypesBook where a.Id == id select a).First();
+            TypesBook card = (from a in _context.TypesBook where a.Id == id select a).First();
       
             return View(card);
         }
@@ -244,16 +249,16 @@ namespace ThreeBook.Controllers
         public ActionResult Edit(int id, System.Web.Mvc.FormCollection collection)
         {
 
-            TypesBook cardReglament = (from a in context.TypesBook where a.Id == id select a).First();
+            TypesBook cardReglament = (from a in _context.TypesBook where a.Id == id select a).First();
             cardReglament.Description = "Stop";
 
-            var isAgeModified = context.Entry(cardReglament).Property("Description").IsModified;
+            var isAgeModified = _context.Entry(cardReglament).Property("Description").IsModified;
             //EntityTypeBuilder < Company >
             try
             {
 
                 UpdateModel(cardReglament);
-                context.SaveChanges();
+                _context.SaveChanges();
                 return RedirectToAction("");
 
             }
@@ -274,7 +279,7 @@ namespace ThreeBook.Controllers
         public ActionResult ListBooks(int? id)
         {
             int Id = Convert.ToInt32(id);
-            var ListReg = (from a in context.TitleBook where a.uid== Id select a).ToList();
+            var ListReg = (from a in _context.TitleBook where a.uid== Id select a).ToList();
             ViewBag.uid = ListReg.FirstOrDefault().uid;
             return View(ListReg);
         }
@@ -304,8 +309,8 @@ namespace ThreeBook.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    context.TitleBook.Add(card);
-                    context.SaveChanges();
+                    _context.TitleBook.Add(card);
+                    _context.SaveChanges();
                 }
 
             }
@@ -324,7 +329,7 @@ namespace ThreeBook.Controllers
         /// <returns></returns>
         public ActionResult ContentBook(int id)
         {
-            List<Table> ListReg = (from a in context.Table where a.uid == id select a).ToList();
+            List<Table> ListReg = (from a in _context.Table where a.uid == id select a).ToList();
 
             return View(ListReg);
         }
@@ -342,25 +347,5 @@ namespace ThreeBook.Controllers
             return Json(name, JsonRequestBehavior.AllowGet);
         }
     }
-    /*
-    public class AgeValidationAttribute : Attribute
-    {
-        public int Age { get; }
-        public AgeValidationAttribute() { }
-        public AgeValidationAttribute(int age) => Age = age;
-    }
-    */
-    /*
-    [AgeValidation(18)]
-    public class Person
-    {
-        public string Name { get; }
-        public int Age { get; set; }
-        public Person(string name, int age)
-        {
-            Name = name;
-            Age = age;
-        }
-    }
-    */
+    
 }
